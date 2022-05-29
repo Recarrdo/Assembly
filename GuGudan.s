@@ -1,4 +1,4 @@
-global main, _start
+global main, start
 
 section .bss
 buffer: resb 128
@@ -24,10 +24,10 @@ multi:
     inc rax ; rax++
     inc rbx ; rbx++
 
-_loop:
+loop:
     mov rcx, 9 ; rcx = 9
     cmp rbx, rcx ; rbx > rcx(9) ?
-        jg _end ; if rbx > rcx : jump end
+        jg end ; if rbx > rcx : jump end
     mov rax, rbx ; rax = rbx
     mov rdi, [buffer] ; rdi = buffer(input)
     mul rdi ; rax = rax * rdi(input)
@@ -36,9 +36,9 @@ _loop:
     call print_line ; (input * increase = res)
     
     inc rbx ; rbx++
-    jmp _loop
+    jmp loop
 
-_end:
+end:
     leave
     ret
     
@@ -70,7 +70,7 @@ print_line:
     ret
     
 main:
-_start:
+start:
     push rbp
     mov rsi, buffer
     mov rdi, fmt
